@@ -62,7 +62,10 @@ function getBloodReq() public view returns (
         string memory, 
         uint256, 
         bool
-    ) 
+    ) {
+        BloodRequest memory request = bloodRequests[msg.sender];
+        
+    }
 
 
 }
