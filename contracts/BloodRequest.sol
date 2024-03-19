@@ -58,4 +58,8 @@ contract BloodReq {
     function fulfillBloodReq() public {
         bloodRequests[msg.sender].fulfilled = true;
     }
+
+    function getRequests() public view returns (address[] memory) {
+        return requesters;
+    }
 }
