@@ -64,7 +64,12 @@ function getBloodReq() public view returns (
         bool
     ) {
         BloodRequest memory request = bloodRequests[msg.sender];
-        
+        return (
+            request.requester,
+            request.pname,
+            request.contactNum,
+            request.district,
+        );
     }
 
 
