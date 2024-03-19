@@ -62,7 +62,7 @@ contract BloodReq {
         uint256, 
         bool
     ){
-
+        BloodRequest memory request = bloodRequests[_requester];
     }
 
 
