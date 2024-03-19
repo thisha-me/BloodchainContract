@@ -50,4 +50,16 @@ contract BloodReq {
         }
         requesters.push(msg.sender);
     }
+
+    function fulfillBloodReqById(address _requester) public {
+        bloodRequests[_requester].fulfilled = true;
+    }
+
+    function fulfillBloodReq() public {
+        bloodRequests[msg.sender].fulfilled = true;
+    }
+
+    function getRequests() public view returns (address[] memory) {
+        return requesters;
+    }
 }
