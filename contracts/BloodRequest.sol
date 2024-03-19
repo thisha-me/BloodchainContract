@@ -50,4 +50,19 @@ contract BloodReq {
         }
         requesters.push(msg.sender);
     }
+
+
+function getBloodReq() public view returns (
+        address, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        uint256, 
+        bool
+    ) 
+
+
 }
