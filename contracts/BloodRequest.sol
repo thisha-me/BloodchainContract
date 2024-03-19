@@ -69,6 +69,11 @@ function getBloodReq() public view returns (
             request.pname,
             request.contactNum,
             request.district,
+            request.province,
+            request.donationCenter,
+            request.bloodType,
+            request.timestamp,
+            request.fulfilled
         );
     }
 
