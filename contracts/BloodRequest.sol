@@ -51,6 +51,21 @@ contract BloodReq {
         requesters.push(msg.sender);
     }
 
+    function getBloodReqById(address _requester) public view returns (
+        address, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        uint256, 
+        bool
+    ){
+
+    }
+
+
     function fulfillBloodReqById(address _requester) public {
         bloodRequests[_requester].fulfilled = true;
     }
