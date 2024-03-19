@@ -18,6 +18,9 @@ contract BloodReq {
     // mapping of requesters to their blood requests
     mapping(address => BloodRequest) public bloodRequests;
 
+    // array of requesters
+    address[] public requesters;
+
     function submitBloodReq(
         string memory _pname, 
         string memory _contactNum, 
@@ -39,5 +42,12 @@ contract BloodReq {
             fulfilled: false
         });
         bloodRequests[msg.sender] = newRequest;
+
+        for(uint i=0; i<requesters.length; i++) {
+            if(requesters[i] == msg.sender) {
+                return;
+            }
+        }
+        requesters.push(msg.sender);
     }
 }
