@@ -63,6 +63,17 @@ contract BloodReq {
         bool
     ){
         BloodRequest memory request = bloodRequests[_requester];
+        return (
+            request.requester,
+            request.pname,
+            request.contactNum,
+            request.district,
+            request.province,
+            request.donationCenter,
+            request.bloodType,
+            request.timestamp,
+            request.fulfilled
+        );
     }
 
 
