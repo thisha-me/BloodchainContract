@@ -118,7 +118,7 @@ function getBloodReq() public view returns (
     function getAllRequests() public view returns (BloodRequest[] memory) {
         BloodRequest[] memory requests = new BloodRequest[](requesters.length);
         for(uint i=0; i<requesters.length; i++) {
-            requests[i] = bloodRequests[requesters[i]]; // get the request by requester
+            requests[i] = bloodRequests[requesters[i]];
         }
         return requests;
     }
