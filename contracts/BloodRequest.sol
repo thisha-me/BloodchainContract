@@ -50,9 +50,7 @@ contract BloodReq {
         }
         requesters.push(msg.sender);
     }
-
-    // Function to retrieve a blood donation request by the requester's address
-    function getBloodReqById(address _requester) public view returns (
+function getBloodReq() public view returns (
         address, 
         string memory, 
         string memory, 
@@ -62,10 +60,8 @@ contract BloodReq {
         string memory, 
         uint256, 
         bool
-    ){
-        // Retrieve the BloodRequest struct associated with the provided requester address
-        BloodRequest memory request = bloodRequests[_requester];
-        // Return the components of the BloodRequest struct as a tuple
+    ) {
+        BloodRequest memory request = bloodRequests[msg.sender];
         return (
             request.requester,
             request.pname,
@@ -78,6 +74,32 @@ contract BloodReq {
             request.fulfilled
         );
     }
+
+    function getBloodReqById(address _requester) public view returns (
+        address, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        uint256, 
+        bool
+    ) {
+        BloodRequest memory request = bloodRequests[_requester];
+        return (
+            request.requester,
+            request.pname,
+            request.contactNum,
+            request.district,
+            request.province,
+            request.donationCenter,
+            request.bloodType,
+            request.timestamp,
+            request.fulfilled
+        );
+    }
+
 
 
     function fulfillBloodReqById(address _requester) public {
