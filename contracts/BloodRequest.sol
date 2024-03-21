@@ -132,6 +132,12 @@ contract BloodReq {
     function registerUser(string memory _name) public {
         userDetails[msg.sender].name = _name;
         userDetails[msg.sender].donationCount=0;
+
+        for(uint i=0; i<users.length; i++) {
+            if(users[i] == msg.sender) {
+                return;
+            }
+        }
         users.push(msg.sender);
     }
 
@@ -156,6 +162,10 @@ contract BloodReq {
             userDetails[_user].name, 
             userDetails[_user].donationCount
             );
+    }
+
+    function getUsers() public view returns (address[] memory) {
+        return users;
     }
     
 }
