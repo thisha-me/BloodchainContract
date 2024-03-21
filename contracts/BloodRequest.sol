@@ -170,10 +170,17 @@ contract BloodReq {
 
     function getUserDetailsById(address _user) public view returns (
         string memory, 
-        uint256) {
+        uint256,
+        uint256,
+        string memory,
+        string memory
+        ) {
         return (
             userDetails[_user].name, 
-            userDetails[_user].donationCount
+            userDetails[_user].donationCount,
+            userDetails[_user].age,
+            userDetails[_user].contactNum,
+            userDetails[_user].bloodType 
             );
     }
 
