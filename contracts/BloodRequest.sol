@@ -122,5 +122,10 @@ function getBloodReq() public view returns (
         }
         return requests;
     }
-
+    struct UserDetails{
+        string name;
+        uint256 donationCount;
+    }
+    mapping(address => UserDetails) public userDetails;
+    
 }
