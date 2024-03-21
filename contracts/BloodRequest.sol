@@ -15,6 +15,13 @@ contract BloodReq {
         bool fulfilled;
     }
 
+    struct UserDetails{
+        string name;
+        uint256 donationCount;
+    }
+
+    mapping(address => UserDetails) public userDetails;
+
     // mapping of requesters to their blood requests
     mapping(address => BloodRequest) public bloodRequests;
 
@@ -122,16 +129,10 @@ function getBloodReq() public view returns (
         }
         return requests;
     }
-    struct UserDetails{
-        string name;
-        uint256 donationCount;
-    }
-    mapping(address => UserDetails) public userDetails;
-    
+
     function registerUser(string memory _name) public {
         userDetails[msg.sender].name = _name;
         userDetails[msg.sender].donationCount=0;
     }
-
     
 }
