@@ -57,7 +57,7 @@ contract BloodReq {
         }
         requesters.push(msg.sender);
     }
-function getBloodReq() public view returns (
+    function getBloodReq() public view returns (
         address, 
         string memory, 
         string memory, 
@@ -113,9 +113,6 @@ function getBloodReq() public view returns (
         bloodRequests[_requester].fulfilled = true;
     }
 
-    function fulfillBloodReq() public {
-        bloodRequests[msg.sender].fulfilled = true;
-    }
 
     function getRequests() public view returns (address[] memory) {
         return requesters;
@@ -134,5 +131,10 @@ function getBloodReq() public view returns (
         userDetails[msg.sender].name = _name;
         userDetails[msg.sender].donationCount=0;
     }
+
+    function fulfillBloodReq(address _donator) public {
+        userDetails[_donator].donationCount++;
+        bloodRequests[msg.sender].fulfilled=true;
+    }
     
 }
