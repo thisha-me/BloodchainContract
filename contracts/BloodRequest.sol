@@ -126,6 +126,12 @@ function getBloodReq() public view returns (
         string name;
         uint256 donationCount;
     }
-    mapping(address => UserDetails) public userDetails;
+    mapping(address => UserDetails) public userDetails;
+    
+    function registerUser(string memory _name) public {
+        userDetails[msg.sender].name = _name;
+        userDetails[msg.sender].donationCount=0;
+    }
+
     
 }
