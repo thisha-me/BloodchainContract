@@ -28,6 +28,8 @@ contract BloodReq {
     // array of requesters
     address[] public requesters;
 
+    address[] public users;
+
     function submitBloodReq(
         string memory _pname, 
         string memory _contactNum, 
@@ -130,11 +132,30 @@ contract BloodReq {
     function registerUser(string memory _name) public {
         userDetails[msg.sender].name = _name;
         userDetails[msg.sender].donationCount=0;
-    }
+        users.push(msg.sender);
+    }
 
     function fulfillBloodReq(address _donator) public {
         userDetails[_donator].donationCount++;
         bloodRequests[msg.sender].fulfilled=true;
+    }
+
+    function getUserDetails() public view returns (
+        string memory, 
+        uint256) {
+        return (
+            userDetails[msg.sender].name, 
+            userDetails[msg.sender].donationCount
+            );
+    }
+
+    function getUserDetailsById(address _user) public view returns (
+        string memory, 
+        uint256) {
+        return (
+            userDetails[_user].name, 
+            userDetails[_user].donationCount
+            );
     }
     
 }
