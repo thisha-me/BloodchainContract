@@ -132,8 +132,11 @@ contract BloodReq {
         return requests;
     }
 
-    function registerUser(string memory _name) public {
+    function registerUser(string memory _name, uint256 _age, string memory _contactNum, string memory _bloodType) public {
         userDetails[msg.sender].name = _name;
+        userDetails[msg.sender].age = _age;
+        userDetails[msg.sender].contactNum = _contactNum;
+        userDetails[msg.sender].bloodType = _bloodType;
         userDetails[msg.sender].donationCount=0;
 
         for(uint i=0; i<users.length; i++) {
