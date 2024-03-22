@@ -20,6 +20,7 @@ contract BloodReq {
         uint256 donationCount;
         uint256 age; 
         string contactNum; 
+        string email;
         string bloodType; 
     }
 
@@ -132,10 +133,11 @@ contract BloodReq {
         return requests;
     }
 
-    function registerUser(string memory _name, uint256 _age, string memory _contactNum, string memory _bloodType) public {
+    function registerUser(string memory _name, uint256 _age, string memory _contactNum, string memory _email, string memory _bloodType) public {
         userDetails[msg.sender].name = _name;
         userDetails[msg.sender].age = _age;
         userDetails[msg.sender].contactNum = _contactNum;
+        userDetails[msg.sender].email = _email;
         userDetails[msg.sender].bloodType = _bloodType;
         userDetails[msg.sender].donationCount=0;
 
@@ -157,6 +159,7 @@ contract BloodReq {
         uint256,
         uint256,
         string memory,
+        string memory,
         string memory
         ) {
         return (
@@ -164,6 +167,7 @@ contract BloodReq {
             userDetails[msg.sender].donationCount,
             userDetails[msg.sender].age,
             userDetails[msg.sender].contactNum,
+            userDetails[msg.sender].email,
             userDetails[msg.sender].bloodType
             );
     }
@@ -173,6 +177,7 @@ contract BloodReq {
         uint256,
         uint256,
         string memory,
+        string memory,
         string memory
         ) {
         return (
@@ -180,6 +185,7 @@ contract BloodReq {
             userDetails[_user].donationCount,
             userDetails[_user].age,
             userDetails[_user].contactNum,
+            userDetails[_user].email,
             userDetails[_user].bloodType 
             );
     }
