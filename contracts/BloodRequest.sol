@@ -163,7 +163,7 @@ contract BloodReq {
         bloodRequests[msg.sender].fulfilled=true;
     }
 
-    function fulfillBloodReqWihoutDonor() public {
+    function fulfillBloodReq() public {
         bloodRequests[msg.sender].fulfilled=true;
     }
 
