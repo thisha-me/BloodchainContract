@@ -23,6 +23,7 @@ contract BloodReq {
         string bloodType;
         uint256 donationCount;
         BloodRequest[] bloodRequestsHistory;
+        BloodRequest[] bloodDonationsHistory;
     }
 
     // mapping of users to their details
@@ -58,6 +59,7 @@ contract BloodReq {
             fulfilled: false
         });
         bloodRequests[msg.sender] = newRequest;
+        userDetails[msg.sender].bloodRequestsHistory.push(newRequest);
 
         for(uint i=0; i<requesters.length; i++) {
             if(requesters[i] == msg.sender) {
@@ -158,6 +160,7 @@ contract BloodReq {
 
     function fulfillBloodReq(address _donator) public {
         userDetails[_donator].donationCount++;
+        userDetails[_donator].bloodDonationsHistory.push(bloodRequests[msg.sender]);
         bloodRequests[msg.sender].fulfilled=true;
     }
 
