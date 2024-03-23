@@ -21,7 +21,7 @@ contract BloodReq {
         string email;
         int age;
         string bloodType;
-        uint256 donationCount;
+        int donationCount;
         BloodRequest[] bloodRequestsHistory;
         BloodRequest[] bloodDonationsHistory;
     }
@@ -159,8 +159,8 @@ contract BloodReq {
     }
 
     function fulfillBloodReq(address _donator) public {
-        userDetails[_donator].donationCount++;
         userDetails[_donator].bloodDonationsHistory.push(bloodRequests[msg.sender]);
+        userDetails[_donator].donationCount++;
         bloodRequests[msg.sender].fulfilled=true;
     }
 
@@ -178,7 +178,7 @@ contract BloodReq {
         string memory, 
         int, 
         string memory, 
-        uint256,
+        int,
         BloodRequest[] memory,
         BloodRequest[] memory) {
         return (
