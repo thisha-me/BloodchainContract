@@ -185,6 +185,7 @@ contract BloodReq {
             );
     }
 
+    //function to get user details from the User ID
     function getUserDetailsById(address _user) public view returns (
         string memory, 
         string memory, 
