@@ -200,7 +200,9 @@ contract BloodReq {
             userDetails[_user].email, 
             userDetails[_user].age, 
             userDetails[_user].bloodType, 
-            userDetails[_user].donationCount
+            userDetails[_user].donationCount,
+            userDetails[_user].bloodRequestsHistory,
+            userDetails[_user].bloodDonationsHistory
             );
     }
 
