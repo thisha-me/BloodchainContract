@@ -17,7 +17,12 @@ contract BloodReq {
 
     struct UserDetails{
         string name;
+        string contactNum;
+        string email;
+        uint256 age;
+        string bloodType;
         uint256 donationCount;
+        BloodRequest[] bloodRequestsHistory;
     }
 
     mapping(address => UserDetails) public userDetails;
