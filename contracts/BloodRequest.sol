@@ -163,6 +163,10 @@ contract BloodReq {
         bloodRequests[msg.sender].fulfilled=true;
     }
 
+    function fulfillBloodReqWihoutDonor() public {
+        bloodRequests[msg.sender].fulfilled=true;
+    }
+
     
     function getUserDetails() public view returns (
         string memory, 
@@ -201,7 +205,7 @@ contract BloodReq {
             userDetails[_user].bloodRequestsHistory
             );
     }
-    
+
     function getUsers() public view returns (address[] memory) {
         return users;
     }
