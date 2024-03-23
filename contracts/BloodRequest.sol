@@ -23,7 +23,7 @@ contract BloodReq {
         string email;
         string bloodType; 
         BloodRequest[] bloodRequestsHistory;
-
+        BloodRequest[] bloodDonationsHistory;
     }
 
     mapping(address => UserDetails) public userDetails;
@@ -57,6 +57,7 @@ contract BloodReq {
             fulfilled: false
         });
         bloodRequests[msg.sender] = newRequest;
+        userDetails[msg.sender].bloodRequestsHistory.push(newRequest);
 
         for(uint i=0; i<requesters.length; i++) {
             if(requesters[i] == msg.sender) {
@@ -154,7 +155,13 @@ contract BloodReq {
     function fulfillBloodReq(address _donator) public {
         userDetails[_donator].donationCount++;
         bloodRequests[msg.sender].fulfilled=true;
+        userDetails[_donator].bloodDonationsHistory.push(bloodRequests[msg.sender]);
     }
+
+    function fulfillBloodReq() public{
+        bloodRequests[msg.sender].fulfilled=true;
+    }
+
 
     function getUserDetails() public view returns (
         string memory, 
