@@ -18,6 +18,12 @@ contract BloodReq {
     struct UserDetails{
         string name;
         uint256 donationCount;
+        uint256 age; 
+        string contactNum; 
+        string email;
+        string bloodType; 
+        BloodRequest[] bloodRequestsHistory;
+
     }
 
     mapping(address => UserDetails) public userDetails;
@@ -129,8 +135,12 @@ contract BloodReq {
         return requests;
     }
 
-    function registerUser(string memory _name) public {
+    function registerUser(string memory _name, uint256 _age, string memory _contactNum, string memory _email, string memory _bloodType) public {
         userDetails[msg.sender].name = _name;
+        userDetails[msg.sender].age = _age;
+        userDetails[msg.sender].contactNum = _contactNum;
+        userDetails[msg.sender].email = _email;
+        userDetails[msg.sender].bloodType = _bloodType;
         userDetails[msg.sender].donationCount=0;
 
         for(uint i=0; i<users.length; i++) {
@@ -148,19 +158,37 @@ contract BloodReq {
 
     function getUserDetails() public view returns (
         string memory, 
-        uint256) {
+        uint256,
+        uint256,
+        string memory,
+        string memory,
+        string memory
+        ) {
         return (
             userDetails[msg.sender].name, 
-            userDetails[msg.sender].donationCount
+            userDetails[msg.sender].donationCount,
+            userDetails[msg.sender].age,
+            userDetails[msg.sender].contactNum,
+            userDetails[msg.sender].email,
+            userDetails[msg.sender].bloodType
             );
     }
 
     function getUserDetailsById(address _user) public view returns (
         string memory, 
-        uint256) {
+        uint256,
+        uint256,
+        string memory,
+        string memory,
+        string memory
+        ) {
         return (
             userDetails[_user].name, 
-            userDetails[_user].donationCount
+            userDetails[_user].donationCount,
+            userDetails[_user].age,
+            userDetails[_user].contactNum,
+            userDetails[_user].email,
+            userDetails[_user].bloodType 
             );
     }
 
