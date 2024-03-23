@@ -57,6 +57,7 @@ contract BloodReq {
             fulfilled: false
         });
         bloodRequests[msg.sender] = newRequest;
+        userDetails[msg.sender].bloodRequestsHistory.push(newRequest);
 
         for(uint i=0; i<requesters.length; i++) {
             if(requesters[i] == msg.sender) {
