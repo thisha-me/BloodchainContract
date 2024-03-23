@@ -163,12 +163,23 @@ contract BloodReq {
         bloodRequests[msg.sender].fulfilled=true;
     }
 
+    
     function getUserDetails() public view returns (
         string memory, 
-        uint256) {
+        string memory, 
+        string memory, 
+        uint256, 
+        string memory, 
+        uint256,
+        BloodRequest[] memory) {
         return (
             userDetails[msg.sender].name, 
-            userDetails[msg.sender].donationCount
+            userDetails[msg.sender].contactNum, 
+            userDetails[msg.sender].email, 
+            userDetails[msg.sender].age, 
+            userDetails[msg.sender].bloodType, 
+            userDetails[msg.sender].donationCount,
+            userDetails[msg.sender].bloodRequestsHistory
             );
     }
 
@@ -184,6 +195,5 @@ contract BloodReq {
     function getUsers() public view returns (address[] memory) {
         return users;
     }
-
     
 }
