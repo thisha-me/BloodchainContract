@@ -179,6 +179,7 @@ contract BloodReq {
         uint256, 
         string memory, 
         uint256,
+        BloodRequest[] memory,
         BloodRequest[] memory) {
         return (
             userDetails[msg.sender].name, 
@@ -187,7 +188,8 @@ contract BloodReq {
             userDetails[msg.sender].age, 
             userDetails[msg.sender].bloodType, 
             userDetails[msg.sender].donationCount,
-            userDetails[msg.sender].bloodRequestsHistory
+            userDetails[msg.sender].bloodRequestsHistory,
+            userDetails[msg.sender].bloodDonationsHistory
             );
     }
 
@@ -198,6 +200,7 @@ contract BloodReq {
         uint256, 
         string memory, 
         uint256,
+        BloodRequest[] memory,
         BloodRequest[] memory) {
         return (
             userDetails[_user].name, 
@@ -206,7 +209,8 @@ contract BloodReq {
             userDetails[_user].age, 
             userDetails[_user].bloodType, 
             userDetails[_user].donationCount,
-            userDetails[_user].bloodRequestsHistory
+            userDetails[_user].bloodRequestsHistory,
+            userDetails[_user].bloodDonationsHistory
             );
     }
 
