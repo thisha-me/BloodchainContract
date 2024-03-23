@@ -23,6 +23,8 @@ contract BloodReq {
         string email;
         string bloodType; 
         BloodRequest[] bloodRequestsHistory;
+        BloodRequest[] bloodDonationsHistory;
+
 
     }
 
@@ -163,7 +165,9 @@ contract BloodReq {
         uint256,
         string memory, 
         uint256,
-        BloodRequest[] memory,) {
+        BloodRequest[] memory,
+        BloodRequest[] memory
+        ) {
         return (
             userDetails[msg.sender].name, 
             userDetails[msg.sender].donationCount,
@@ -171,7 +175,8 @@ contract BloodReq {
             userDetails[msg.sender].contactNum,
             userDetails[msg.sender].email,
             userDetails[msg.sender].bloodType,
-            userDetails[msg.sender].bloodRequestsHistory;
+            userDetails[msg.sender].bloodRequestsHistory,
+            userDetails[msg.sender].bloodDonationsHistory
             );
     }
 
