@@ -23,7 +23,7 @@ contract BloodReq {
         string email;
         string bloodType; 
         BloodRequest[] bloodRequestsHistory;
-
+        BloodRequest[] bloodDonationsHistory;
     }
 
     mapping(address => UserDetails) public userDetails;
