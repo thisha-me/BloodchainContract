@@ -22,6 +22,8 @@ contract BloodReq {
         string contactNum; 
         string email;
         string bloodType; 
+        BloodRequest[] bloodRequestsHistory;
+
     }
 
     mapping(address => UserDetails) public userDetails;
