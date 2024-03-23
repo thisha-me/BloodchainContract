@@ -25,6 +25,7 @@ contract BloodReq {
         BloodRequest[] bloodRequestsHistory;
     }
 
+    // mapping of users to their details
     mapping(address => UserDetails) public userDetails;
 
     // mapping of requesters to their blood requests
@@ -33,6 +34,7 @@ contract BloodReq {
     // array of requesters
     address[] public requesters;
 
+    // array of users
     address[] public users;
 
     function submitBloodReq(
