@@ -157,20 +157,21 @@ contract BloodReq {
     }
 
     function getUserDetails() public view returns (
+        string memory,
+        string memory,
         string memory, 
         uint256,
+        string memory, 
         uint256,
-        string memory,
-        string memory,
-        string memory
-        ) {
+        BloodRequest[] memory,) {
         return (
             userDetails[msg.sender].name, 
             userDetails[msg.sender].donationCount,
             userDetails[msg.sender].age,
             userDetails[msg.sender].contactNum,
             userDetails[msg.sender].email,
-            userDetails[msg.sender].bloodType
+            userDetails[msg.sender].bloodType,
+            userDetails[msg.sender].bloodRequestsHistory;
             );
     }
 
