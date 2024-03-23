@@ -132,9 +132,23 @@ contract BloodReq {
         return requests;
     }
 
-    function registerUser(string memory _name) public {
-        userDetails[msg.sender].name = _name;
-        userDetails[msg.sender].donationCount=0;
+    function registerUser(
+        string memory _name, 
+        string memory _contactNum, 
+        string memory _email, 
+        uint256 _age, 
+        string memory _bloodType
+    ) public {
+        UserDetails memory newUser = UserDetails({
+            name: _name,
+            contactNum: _contactNum,
+            email: _email,
+            age: _age,
+            bloodType: _bloodType,
+            donationCount: 0,
+            bloodRequestsHistory: new BloodRequest[](0)
+        });
+        userDetails[msg.sender] = newUser;
 
         for(uint i=0; i<users.length; i++) {
             if(users[i] == msg.sender) {
@@ -170,5 +184,6 @@ contract BloodReq {
     function getUsers() public view returns (address[] memory) {
         return users;
     }
+
     
 }
