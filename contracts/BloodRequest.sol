@@ -19,7 +19,7 @@ contract BloodReq {
         string name;
         string contactNum;
         string email;
-        uint256 age;
+        int age;
         string bloodType;
         uint256 donationCount;
         BloodRequest[] bloodRequestsHistory;
@@ -140,7 +140,7 @@ contract BloodReq {
         string memory _name, 
         string memory _contactNum, 
         string memory _email, 
-        uint256 _age, 
+        int _age, 
         string memory _bloodType
     ) public {
         userDetails[msg.sender].name = _name;
@@ -176,7 +176,7 @@ contract BloodReq {
         string memory, 
         string memory, 
         string memory, 
-        uint256, 
+        int, 
         string memory, 
         uint256,
         BloodRequest[] memory,
