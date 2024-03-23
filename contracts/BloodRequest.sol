@@ -154,7 +154,13 @@ contract BloodReq {
     function fulfillBloodReq(address _donator) public {
         userDetails[_donator].donationCount++;
         bloodRequests[msg.sender].fulfilled=true;
+        userDetails[_donator].bloodDonationsHistory.push(bloodRequests[msg.sender]);
     }
+
+    function fulfillBloodReq() public{
+        bloodRequests[msg.sender].fulfilled=true;
+    }
+
 
     function getUserDetails() public view returns (
         string memory, 
