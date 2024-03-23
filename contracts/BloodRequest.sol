@@ -37,6 +37,7 @@ contract BloodReq {
     // array of users
     address[] public users;
 
+
     function submitBloodReq(
         string memory _pname, 
         string memory _contactNum, 
@@ -57,7 +58,6 @@ contract BloodReq {
             fulfilled: false
         });
         bloodRequests[msg.sender] = newRequest;
-        bloodRequests[msg.sender].fulfilled = false;
 
         for(uint i=0; i<requesters.length; i++) {
             if(requesters[i] == msg.sender) {
@@ -141,16 +141,12 @@ contract BloodReq {
         uint256 _age, 
         string memory _bloodType
     ) public {
-        UserDetails memory newUser = UserDetails({
-            name: _name,
-            contactNum: _contactNum,
-            email: _email,
-            age: _age,
-            bloodType: _bloodType,
-            donationCount: 0,
-            bloodRequestsHistory: new BloodRequest[](0)
-        });
-        userDetails[msg.sender] = newUser;
+        userDetails[msg.sender].name = _name;
+        userDetails[msg.sender].contactNum = _contactNum;
+        userDetails[msg.sender].email = _email;
+        userDetails[msg.sender].age = _age;
+        userDetails[msg.sender].bloodType = _bloodType;
+        userDetails[msg.sender].donationCount=0;
 
         for(uint i=0; i<users.length; i++) {
             if(users[i] == msg.sender) {
