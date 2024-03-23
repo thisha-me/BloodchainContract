@@ -43,7 +43,6 @@ contract BloodReq {
         string memory _donationCenter, 
         string memory _bloodType
     ) public {
-        
         BloodRequest memory newRequest = BloodRequest({
             requester: msg.sender,
             pname: _pname,
@@ -56,6 +55,7 @@ contract BloodReq {
             fulfilled: false
         });
         bloodRequests[msg.sender] = newRequest;
+        bloodRequests[msg.sender].fulfilled = false;
 
         for(uint i=0; i<requesters.length; i++) {
             if(requesters[i] == msg.sender) {
@@ -64,6 +64,7 @@ contract BloodReq {
         }
         requesters.push(msg.sender);
     }
+
     function getBloodReq() public view returns (
         address, 
         string memory, 
@@ -114,12 +115,9 @@ contract BloodReq {
         );
     }
 
-
-
     function fulfillBloodReqById(address _requester) public {
         bloodRequests[_requester].fulfilled = true;
     }
-
 
     function getRequests() public view returns (address[] memory) {
         return requesters;
