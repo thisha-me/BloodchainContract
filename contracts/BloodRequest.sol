@@ -170,11 +170,11 @@ contract BloodReq {
         ) {
         return (
             userDetails[msg.sender].name, 
-            userDetails[msg.sender].donationCount,
-            userDetails[msg.sender].age,
             userDetails[msg.sender].contactNum,
             userDetails[msg.sender].email,
+            userDetails[msg.sender].age,
             userDetails[msg.sender].bloodType,
+            userDetails[msg.sender].donationCount,
             userDetails[msg.sender].bloodRequestsHistory,
             userDetails[msg.sender].bloodDonationsHistory
             );
