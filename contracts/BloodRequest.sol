@@ -17,15 +17,16 @@ contract BloodReq {
 
     struct UserDetails{
         string name;
-        uint256 donationCount;
-        uint256 age; 
-        string contactNum; 
+        string contactNum;
         string email;
-        string bloodType; 
+        int age;
+        string bloodType;
+        int donationCount;
         BloodRequest[] bloodRequestsHistory;
         BloodRequest[] bloodDonationsHistory;
     }
 
+    // mapping of users to their details
     mapping(address => UserDetails) public userDetails;
 
     // mapping of requesters to their blood requests
@@ -34,7 +35,9 @@ contract BloodReq {
     // array of requesters
     address[] public requesters;
 
+    // array of users
     address[] public users;
+
 
     function submitBloodReq(
         string memory _pname, 
@@ -44,7 +47,6 @@ contract BloodReq {
         string memory _donationCenter, 
         string memory _bloodType
     ) public {
-        
         BloodRequest memory newRequest = BloodRequest({
             requester: msg.sender,
             pname: _pname,
@@ -66,6 +68,7 @@ contract BloodReq {
         }
         requesters.push(msg.sender);
     }
+
     function getBloodReq() public view returns (
         address, 
         string memory, 
@@ -116,12 +119,9 @@ contract BloodReq {
         );
     }
 
-
-
     function fulfillBloodReqById(address _requester) public {
         bloodRequests[_requester].fulfilled = true;
     }
-
 
     function getRequests() public view returns (address[] memory) {
         return requesters;
@@ -136,11 +136,17 @@ contract BloodReq {
         return requests;
     }
 
-    function registerUser(string memory _name, uint256 _age, string memory _contactNum, string memory _email, string memory _bloodType) public {
+    function registerUser(
+        string memory _name, 
+        string memory _contactNum, 
+        string memory _email, 
+        int _age, 
+        string memory _bloodType
+    ) public {
         userDetails[msg.sender].name = _name;
-        userDetails[msg.sender].age = _age;
         userDetails[msg.sender].contactNum = _contactNum;
         userDetails[msg.sender].email = _email;
+        userDetails[msg.sender].age = _age;
         userDetails[msg.sender].bloodType = _bloodType;
         userDetails[msg.sender].donationCount=0;
 
@@ -153,39 +159,83 @@ contract BloodReq {
     }
 
     function fulfillBloodReq(address _donator) public {
+        userDetails[_donator].bloodDonationsHistory.push(bloodRequests[msg.sender]);
         userDetails[_donator].donationCount++;
         bloodRequests[msg.sender].fulfilled=true;
-        userDetails[_donator].bloodDonationsHistory.push(bloodRequests[msg.sender]);
     }
 
-    function fulfillBloodReq() public{
+    function fulfillBloodReq() public {
         bloodRequests[msg.sender].fulfilled=true;
     }
 
-
+    function getBloodRequestsHistory() public view returns (BloodRequest[] memory) {
+        return userDetails[msg.sender].bloodRequestsHistory;
+    }
+    
     function getUserDetails() public view returns (
-        string memory,
-        string memory,
         string memory, 
-        uint256,
         string memory, 
-        uint256,
+        string memory, 
+        int, 
+        string memory, 
+        int,
         BloodRequest[] memory,
-        BloodRequest[] memory
-        ) {
+        BloodRequest[] memory) {
         return (
             userDetails[msg.sender].name, 
-            userDetails[msg.sender].contactNum,
-            userDetails[msg.sender].email,
-            userDetails[msg.sender].age,
-            userDetails[msg.sender].bloodType,
+            userDetails[msg.sender].contactNum, 
+            userDetails[msg.sender].email, 
+            userDetails[msg.sender].age, 
+            userDetails[msg.sender].bloodType, 
             userDetails[msg.sender].donationCount,
             userDetails[msg.sender].bloodRequestsHistory,
             userDetails[msg.sender].bloodDonationsHistory
             );
     }
 
-    
+    function getFullFilledRequests(bool _fullfilled) public view returns (BloodRequest[] memory) {
+        uint count = 0;
+        for(uint i=0; i<requesters.length; i++) {
+            if(bloodRequests[requesters[i]].fulfilled == _fullfilled) {
+                count++;
+            }
+        }
+        BloodRequest[] memory requests = new BloodRequest[](count);
+        uint j = 0;
+        for(uint i=0; i<requesters.length; i++) {
+            if(bloodRequests[requesters[i]].fulfilled == _fullfilled) {
+                requests[j] = bloodRequests[requesters[i]];
+                j++;
+            }
+        }
+        return requests;
+    }
+
+    function getActiveRequest() public view returns (
+        address, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        uint256, 
+        bool) {
+            if(bloodRequests[msg.sender].fulfilled == false) {
+                BloodRequest memory request = bloodRequests[msg.sender];
+                return (
+                    request.requester,
+                    request.pname,
+                    request.contactNum,
+                    request.district,
+                    request.province,
+                    request.donationCenter,
+                    request.bloodType,
+                    request.timestamp,
+                    request.fulfilled
+                );
+            }
+    }
 
     function getUsers() public view returns (address[] memory) {
         return users;
