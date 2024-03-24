@@ -193,26 +193,49 @@ contract BloodReq {
             );
     }
 
-    // function getUserDetailsById(address _user) public view returns (
-    //     string memory, 
-    //     string memory, 
-    //     string memory, 
-    //     uint256, 
-    //     string memory, 
-    //     uint256,
-    //     BloodRequest[] memory,
-    //     BloodRequest[] memory) {
-    //     return (
-    //         userDetails[_user].name, 
-    //         userDetails[_user].contactNum, 
-    //         userDetails[_user].email, 
-    //         userDetails[_user].age, 
-    //         userDetails[_user].bloodType, 
-    //         userDetails[_user].donationCount,
-    //         userDetails[_user].bloodRequestsHistory,
-    //         userDetails[_user].bloodDonationsHistory
-    //         );
-    // }
+    function getFullFilledRequests(bool _fullfilled) public view returns (BloodRequest[] memory) {
+        uint count = 0;
+        for(uint i=0; i<requesters.length; i++) {
+            if(bloodRequests[requesters[i]].fulfilled == _fullfilled) {
+                count++;
+            }
+        }
+        BloodRequest[] memory requests = new BloodRequest[](count);
+        uint j = 0;
+        for(uint i=0; i<requesters.length; i++) {
+            if(bloodRequests[requesters[i]].fulfilled == _fullfilled) {
+                requests[j] = bloodRequests[requesters[i]];
+                j++;
+            }
+        }
+        return requests;
+    }
+
+    function getActiveRequest() public view returns (
+        address, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        string memory, 
+        uint256, 
+        bool) {
+            if(bloodRequests[msg.sender].fulfilled == false) {
+                BloodRequest memory request = bloodRequests[msg.sender];
+                return (
+                    request.requester,
+                    request.pname,
+                    request.contactNum,
+                    request.district,
+                    request.province,
+                    request.donationCenter,
+                    request.bloodType,
+                    request.timestamp,
+                    request.fulfilled
+                );
+            }
+    }
 
     function getUsers() public view returns (address[] memory) {
         return users;
